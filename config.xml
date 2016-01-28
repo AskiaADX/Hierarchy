@@ -7,8 +7,8 @@
   <info>
     <name>adc2-hierarchy</name>
     <guid>49baccca-474e-4818-8708-1cc9a41b34d4</guid>
-    <version>1.0.1</version>
-    <date>2014-03-04</date>
+    <version>1.1.0</version>
+    <date>2016-01-28</date>
     <description>
       <![CDATA[
         Use relative database to create hierarchical search.

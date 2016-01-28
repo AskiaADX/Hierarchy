@@ -172,7 +172,19 @@ Default: Sorry this page uses Javascript code, please enable it
 
 Add the input search
 
-Default: Yes
+Possible values:
+
+* 0 - No search
+* 1 - Auto-generate search
+* 2 - Custom search input
+
+Default: 1
+
+#### Id of the custom search input (customSearchId) [OPTIONAL]
+
+Id of the custom search input (when useSearch=2)
+
+Default: ''
 
 #### Label of search input (searchLabel) [OPTIONAL]
 
