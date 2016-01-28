@@ -1,0 +1,33 @@
+{%
+dim id = CurrentADC.InstanceId
+dim dropdownsize = ""
+If CurrentADC.PropValue("dropDownSize").ToNumber() > 1 Then
+    dropdownsize = "size=\"" + CurrentADC.PropValue("dropDownSize") + "\""
+EndIf
+dim arrLevels = CurrentADC.PropValue("levelNames").Split(",")
+dim i
+dim divAttr = ""
+dim inputAttr = ""
+If CurrentADC.PropValue("visibility") = "hide" Then
+   divAttr = "class=\"hide\""
+ElseIf CurrentADC.PropValue("visibility") = "disabled" Then
+   divAttr = "disabled=\"disabled\""
+   inputAttr = divAttr
+EndIf
+%}
+<div class="hierarchy-search" id="hierarchy_search_container_{%= id%}">
+    {% If CurrentADC.PropValue("useSearch") = "1" Then %}
+    <div class="hierarchy-search-input-container">
+        <label for="hierarchy_search_{%= id %}">{%:= CurrentADC.PropValue("searchLabel")%}</label>
+        <input type="text" id="hierarchy_search_{%= id %}" />
+    </div>
+    {% EndIf %}
+    <div class="hierarchy-search-result-container">
+        {% For i = 1 To arrLevels.Count %}
+        <div {%:= On(i > 1, divAttr, "")%}>
+            <label for="hierarchy_level_{%= id %}_{%= (i - 1) %}">{%:= arrLevels[i].Replace("\"", "")%}</label>
+            <select id="hierarchy_level_{%= id %}_{%= (i - 1) %}" {%:= dropdownsize%} {%:= On(i > 1, inputAttr, "")%}></select>
+        </div>
+        {% Next %}
+    </div>
+</div>

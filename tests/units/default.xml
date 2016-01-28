@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tests xmlns="http://www.askia.com/ADCUnitTestSchema"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.askia.com/ADCUnitTestSchema http://www.askia.com/Downloads/dev/schemas/adc2.0/UnitTests.xsd">
+
+  <units>
+
+    <test id="head_not_empty" description="The head section should not be empty" cases="all">
+      <asserts>
+        <head>
+          <assert_not_empty/>
+        </head>
+      </asserts>
+    </test>
+
+    <test id="head_validation" description="Head validation" cases="all">
+      <asserts>
+        <head>
+          <assert_contains>
+            <![CDATA[#hierarchy_search_container_1 input,
+#hierarchy_search_container_1 select {
+    width : 300px;
+}]]>
+          </assert_contains>
+          <assert_contains>
+            <![CDATA[#hierarchy_search_container_1  .hierarchy-search-result-container div {
+    display: inline-block;
+    margin-right: 20px;
+    *zoom : 1;
+    *display : inline;
+}]]>
+          </assert_contains>
+        </head>
+      </asserts>
+    </test>
+
+    <test id="include_hierarchy_css_file" description="The head section should include the hierarchy.css file" cases="all">
+      <asserts>
+        <head>
+          <select_nodes xPath="//link[@href='../Resources/Survey/adc2-hierarchy/hierarchy.css']">
+            <assert_exist />
+          </select_nodes>
+        </head>
+      </asserts>
+    </test>
+
+    <test id="head_validation_vertical_orientation" description="Head validate vertical orientation" cases="all">
+      <arrange>
+        <properties>
+          <property id="orientation">
+            <value>0</value>
+          </property>
+        </properties>
+      </arrange>
+      <asserts>
+        <head>
+          <assert_not_contains>
+            <![CDATA[#hierarchy_search_container_1  .hierarchy-search-result-container div {]]>
+          </assert_not_contains>
+        </head>
+      </asserts>
+    </test>
+
+    <test id="head_validation_horizontal_orientation" description="Head validate horizontal orientation" cases="all">
+      <arrange>
+        <properties>
+          <property id="orientation">
+            <value>1</value>
+          </property>
+        </properties>
+      </arrange>
+      <asserts>
+        <head>
+          <assert_contains>
+            <![CDATA[#hierarchy_search_container_1  .hierarchy-search-result-container div {]]>
+          </assert_contains>
+        </head>
+      </asserts>
+    </test>
+
+    <test id="placeholder_not_empty" description="The placeholder section should not be empty" cases="all">
+      <asserts>
+        <placeholder>
+          <assert_not_empty/>
+        </placeholder>
+      </asserts>
+    </test>
+
+    <test id="placeholder_validation" description="Placeholder validation" cases="all">
+      <asserts>
+        <placeholder>
+          <select_nodes xPath="//div[@class='hierarchy-search']">
+            <assert_has_attr name="id" value="hierarchy_search_container_1"/>
+          </select_nodes>
+          <select_nodes xPath="//label[@for='hierarchy_search_1']">
+            <assert_contains>Search:</assert_contains>
+          </select_nodes>
+          <select_nodes xPath="//input[@id='hierarchy_search_1'][@type='text']">
+            <assert_exist />
+          </select_nodes>
+          <select_nodes xPath="//label[@for='hierarchy_level_1_0']">
+            <assert_contains>Brands:</assert_contains>
+          </select_nodes>
+          <select_nodes xPath="//select[@id='hierarchy_level_1_0']">
+            <assert_has_attr name="size" value="5"/>
+          </select_nodes>
+          <select_nodes xPath="//label[@for='hierarchy_level_1_1']">
+            <assert_contains>Models:</assert_contains>
+          </select_nodes>
+          <select_nodes xPath="//select[@id='hierarchy_level_1_1']">
+            <assert_has_attr name="size" value="5"/>
+          </select_nodes>
+          <select_nodes xPath="//label[@for='hierarchy_level_1_2']">
+            <assert_contains>Versions:</assert_contains>
+          </select_nodes>
+          <select_nodes xPath="//select[@id='hierarchy_level_1_2']">
+            <assert_has_attr name="size" value="5"/>
+          </select_nodes>
+          <select_nodes xPath="//label[@for='hierarchy_level_1_3']">
+            <assert_contains>Options:</assert_contains>
+          </select_nodes>
+          <select_nodes xPath="//select[@id='hierarchy_level_1_3']">
+            <assert_has_attr name="size" value="5"/>
+          </select_nodes>
+        </placeholder>
+      </asserts>
+    </test>
+
+    <test id="placeholder_validate_use_search_true" description="Search input should be generated with useSearch=true" cases="all">
+      <arrange>
+        <properties>
+          <property id="useSearch">
+            <value>true</value>
+          </property>
+        </properties>
+      </arrange>
+      <asserts>
+        <placeholder>
+          <select_nodes xPath="//div[@class='hierarchy-search-input-container']">
+            <assert_exist/>
+          </select_nodes>
+          <select_nodes xPath="//label[@for='hierarchy_search_1']">
+            <assert_contains>Search:</assert_contains>
+          </select_nodes>
+          <select_nodes xPath="//input[@id='hierarchy_search_1'][@type='text']">
+            <assert_exist />
+          </select_nodes>
+        </placeholder>
+      </asserts>
+    </test>
+
+    <test id="placeholder_validate_use_search_false" description="Search input should not be generated with useSearch=false" cases="all">
+      <arrange>
+        <properties>
+          <property id="useSearch">
+            <value>false</value>
+          </property>
+        </properties>
+      </arrange>
+      <asserts>
+        <placeholder>
+          <select_nodes xPath="//div[@class='hierarchy-search-input-container']">
+            <assert_not_exist/>
+          </select_nodes>
+          <select_nodes xPath="//label[@for='hierarchy_search_1']">
+            <assert_not_exist/>
+          </select_nodes>
+          <select_nodes xPath="//input[@id='hierarchy_search_1'][@type='text']">
+            <assert_not_exist/>
+          </select_nodes>
+        </placeholder>
+      </asserts>
+    </test>
+
+    <test id="placeholder_validate_visibility_visible" description="No extra css classes or html attributes" cases="all">
+      <arrange>
+        <properties>
+          <property id="visibility">
+            <value>visible</value>
+          </property>
+        </properties>
+      </arrange>
+      <asserts>
+        <placeholder>
+          <select_nodes xPath="//div[@class='hide']">
+            <assert_not_exist/>
+          </select_nodes>
+          <select_nodes xPath="//div[@disabled='disabled']">
+            <assert_not_exist/>
+          </select_nodes>
+          <select_nodes xPath="//select[@disabled='disabled']">
+            <assert_not_exist/>
+          </select_nodes>
+        </placeholder>
+      </asserts>
+    </test>
+
+    <test id="placeholder_validate_visibility_hidden" description="Add class=hide but not html attributes" cases="all">
+      <arrange>
+        <properties>
+          <property id="visibility">
+            <value>hide</value>
+          </property>
+        </properties>
+      </arrange>
+      <asserts>
+        <placeholder>
+          <select_nodes xPath="//div[@class='hide']">
+            <assert_exist/>
+            <assert_count is="equal" value="3"/>
+          </select_nodes>
+          <select_nodes xPath="//div[@disabled='disabled']">
+            <assert_not_exist/>
+          </select_nodes>
+          <select_nodes xPath="//select[@disabled='disabled']">
+            <assert_not_exist/>
+          </select_nodes>
+          <select_nodes xPath="//select[@class='hide']">
+            <assert_not_exist/>
+          </select_nodes>
+        </placeholder>
+      </asserts>
+    </test>
+
+    <test id="placeholder_validate_visibility_disabled" description="Add attribute disabled=disabled but not css class" cases="all">
+      <arrange>
+        <properties>
+          <property id="visibility">
+            <value>disabled</value>
+          </property>
+        </properties>
+      </arrange>
+      <asserts>
+        <placeholder>
+          <select_nodes xPath="//div[@class='hide']">
+            <assert_not_exist/>
+            
+          </select_nodes>
+          <select_nodes xPath="//div[@disabled='disabled']">
+            <assert_exist/>
+            <assert_count is="equal" value="3"/>
+          </select_nodes>
+          <select_nodes xPath="//select[@disabled='disabled']">
+            <assert_exist/>
+            <assert_count is="equal" value="3"/>
+          </select_nodes>
+        </placeholder>
+      </asserts>
+    </test>
+
+    <test id="foot_not_empty" description="The foot section should not be empty" cases="all">     
+      <asserts>
+        <foot>
+          <assert_not_empty />
+        </foot>
+      </asserts>
+    </test>
+
+    <test id="include_hierarchy_js_file" description="The foot section should include the hierarchy.js file" cases="all">
+      <asserts>
+        <foot>
+          <select_nodes xPath="//script[@src='../Resources/Survey/adc2-hierarchy/hierarchy.js']">
+            <assert_exist />
+          </select_nodes>
+        </foot>
+      </asserts>  
+    </test>
+
+    <test id="include_database_js_file" description="The foot section should include the database.js file" cases="all">
+      <asserts>
+        <foot>
+          <select_nodes xPath="//script[@src='../Resources/Survey/database.js']">
+            <assert_exist />
+          </select_nodes>
+        </foot>
+      </asserts>
+    </test>
+
+    <test id="dynamic_js_validation" description="Dynamic js" cases="all">
+      <asserts>
+        <foot>
+          <assert_contains>
+            <![CDATA[database: Hierarchy.databases["vehicles"]]]>
+          </assert_contains>
+          <assert_contains>
+            <![CDATA[searchIn: ["brand", "model", "version", "option"]]>
+          </assert_contains>
+          <assert_contains>
+            <![CDATA[values: ["brand_id", "model_id", "model_code", "version_id", "option_id", "id", "code"]]>
+          </assert_contains>
+          <assert_contains>
+            <![CDATA[prefix: "vehicle_"]]>
+          </assert_contains>
+          <assert_contains>
+            <![CDATA[blankOptions: null]]>
+          </assert_contains>
+          <assert_contains>
+            <![CDATA[dropdowns: false]]>
+          </assert_contains>
+          <assert_contains>
+            <![CDATA[useSearch: true]]>
+          </assert_contains>
+          <assert_contains>
+            <![CDATA[searchAtBeginning: true]]>
+          </assert_contains>
+          <assert_contains>
+            <![CDATA[searchSeparator: " "]]>
+          </assert_contains>
+          <assert_contains>
+            <![CDATA[firstLevelVisible: true]]>
+          </assert_contains>
+          <assert_contains>
+            <![CDATA[minChars: 2]]>
+          </assert_contains>
+          <assert_contains>
+            <![CDATA[instanceId: 1]]>
+          </assert_contains>
+          <assert_contains>
+            <![CDATA[maxResults: 25]]>
+          </assert_contains>
+          <assert_contains>
+            <![CDATA[visibility: "disabled"]]>
+          </assert_contains>
+          <assert_contains>
+            <![CDATA[autoSelect: true]]>
+          </assert_contains>
+        </foot>
+      </asserts>
+    </test>
+
+    <test id="dynamic_js_validate_blank_options_null" description="Blank options as null" cases="all">
+      <arrange>
+        <properties>
+          <property id="blankOptions">
+            <value></value>
+          </property>
+        </properties>
+      </arrange>
+      <asserts>
+        <foot>
+          <assert_contains>
+            <![CDATA[blankOptions: null]]>
+          </assert_contains>
+        </foot>
+      </asserts>
+    </test>
+
+    <test id="dynamic_js_validate_blank_options_array" description="Blank options as array" cases="all">
+      <arrange>
+        <properties>
+          <property id="blankOptions">
+            <value>"Please select a brand", "Please select a model", "Please select a version", "Please select an option"</value>
+          </property>
+        </properties>
+      </arrange>
+      <asserts>
+        <foot>
+          <assert_contains>
+            <![CDATA[blankOptions: ["Please select a brand", "Please select a model", "Please select a version", "Please select an option"]]]>
+          </assert_contains>
+        </foot>
+      </asserts>
+    </test>
+
+    <test id="dynamic_js_validate_dropdowns_false" description="dropdowns = false" cases="all">
+      <arrange>
+        <properties>
+          <property id="dropDownSize">
+            <value>2</value>
+          </property>
+        </properties>
+      </arrange>
+      <asserts>
+        <foot>
+          <assert_contains>
+            <![CDATA[dropdowns: false]]>
+          </assert_contains>
+        </foot>
+      </asserts>
+    </test>
+
+    <test id="dynamic_js_validate_dropdowns_true" description="dropdowns = true" cases="all">
+      <arrange>
+        <properties>
+          <property id="dropDownSize">
+            <value>1</value>
+          </property>
+        </properties>
+      </arrange>
+      <asserts>
+        <foot>
+          <assert_contains>
+            <![CDATA[dropdowns: true]]>
+          </assert_contains>
+        </foot>
+      </asserts>
+    </test>
+  </units>
+    
+</tests>
+
+          

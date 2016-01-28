@@ -1,0 +1,18 @@
+#hierarchy_search_container_{%= CurrentADC.InstanceId%} input,
+#hierarchy_search_container_{%= CurrentADC.InstanceId%} select {
+    width : {%:= CurrentADC.PropValue("inputsWidth")%};
+}
+{% if CurrentADC.PropValue("orientation").ToNumber() = 1 Then %}
+#hierarchy_search_container_{%= CurrentADC.InstanceId%} input::-ms-clear,
+#hierarchy_search_container_{%= CurrentADC.InstanceId%} input::-ms-reveal {
+    display:none;
+    height:0;
+    width: 0;
+}
+#hierarchy_search_container_{%= CurrentADC.InstanceId%}  .hierarchy-search-result-container div {
+    display: inline-block;
+    margin-right: {%:= CurrentADC.PropValue("horizontalSpace")%};
+    *zoom : 1;
+    *display : inline;
+}
+{% End if %}

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<testCases xmlns="http://www.askia.com/ADCUnitTestSchema"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.askia.com/ADCUnitTestSchema http://www.askia.com/Downloads/dev/schemas/adc2.0/UnitTests.xsd">
+
+  <cases id="default_chapter" description="default with chapter">
+    <case description="default with chapter" fixture="chapter.xml">
+      <arrange>
+        <output id="default"/>
+      </arrange>
+      <asserts>
+        <assert_output id="default"/>
+      </asserts>
+    </case>
+  </cases>
+
+  <cases id="chapter" description="All outputs with chapter" cases="default_chapter" />
+  <cases id="default" description="All default outputs" cases="default_chapter" />
+  <cases id="all" description="All outputs with all questions" cases="default" />
+
+</testCases>

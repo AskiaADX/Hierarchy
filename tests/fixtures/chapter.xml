@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<fixture xmlns="http://www.askia.com/ADCUnitTestSchema"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.askia.com/ADCUnitTestSchema http://www.askia.com/Downloads/dev/schemas/adc2.0/UnitTests.xsd">
+  <arrange>
+    <properties>
+      <property id="database">
+        <value>??ResPath??database.js</value>
+      </property>
+      <property id="databaseName">
+        <value>vehicles</value>
+      </property>
+      <property id="searchIn">
+        <value>"brand", "model", "version", "option"</value>
+      </property>
+      <property id="searchAtBeginning">
+        <value>true</value>
+      </property>
+      <property id="searchSeparator">
+        <value><![CDATA[ ]]></value>
+      </property>
+      <property id="values">
+        <value>"brand_id", "model_id", "model_code", "version_id", "option_id", "id", "code"</value>
+      </property>
+      <property id="levelNames">
+        <value>"Brands:", "Models:", "Versions:", "Options:"</value>
+      </property>
+      <property id="prefix">
+        <value>vehicle_</value>
+      </property>
+      <property id="useSearch">
+        <value>true</value>
+      </property>
+      <property id="firstLevelVisible">
+        <value>true</value>
+      </property>
+      <property id="autoSelect">
+        <value>true</value>
+      </property>
+      <property id="searchLabel">
+        <value>Search:</value>
+      </property>
+      <property id="orientation">
+        <value>1</value>
+      </property>
+      <property id="horizontalSpace">
+        <value>20px</value>
+      </property>
+      <property id="inputsWidth">
+        <value>300px</value>
+      </property>
+      <property id="dropDownSize">
+        <value>5</value>
+      </property>
+      <property id="blankOptions">
+        <value></value>
+      </property>
+      <property id="minChars">
+        <value>2</value>
+      </property>
+      <property id="maxResults">
+        <value>25</value>
+      </property>
+      <property id="visibility">
+        <value>disabled</value>
+      </property>
+    </properties>
+    <Survey Name="ChapterSurvey" CurrentQuestion="chapter" Version="1.0" Full="1" MaxQuestionID="1" MaxResponseID="0">
+      <Languages>
+        <Language ID="2057" Abbr="ENG" Name="English (United Kingdom)" Default="1"/>
+      </Languages>
+      <Questions>
+        <Question ID="1" Shortcut="chapter" Order="1" ElementType="chapter" Translated="0">
+          <LongCaption>chapter</LongCaption>
+        </Question>
+      </Questions>
+      <ErrorMessages/>
+      <ScreenGroups/>
+      <Resources/>
+      <InternetOptions>
+        <Buttons/>
+        <Page Layout="0"/>
+        <Errors/>
+        <Table/>
+        <JavaScript>
+          <LivePath>../Scripts/</LivePath>
+        </JavaScript>
+        <Exit/>
+      </InternetOptions>
+    </Survey>
+  </arrange>
+</fixture>
