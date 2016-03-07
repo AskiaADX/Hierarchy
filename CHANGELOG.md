@@ -1,3 +1,7 @@
+# Version 1.1.1
+
+* Fixed field not populated when going back on the screen for the useSearch = 2
+
 # Version 1.1.0
 
 * Allow the usage of a custom input search

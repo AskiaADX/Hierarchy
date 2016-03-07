@@ -7,7 +7,7 @@
   <info>
     <name>adc2-hierarchy</name>
     <guid>49baccca-474e-4818-8708-1cc9a41b34d4</guid>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <date>2016-01-28</date>
     <description>
       <![CDATA[
@@ -23,7 +23,10 @@
       ]]>
     </description>
     <author>
-      <![CDATA[Mamadou Sy <mamadou@askia.com>]]>
+      <![CDATA[
+      Mamadou Sy <mamadou@askia.com>
+      Jerome Duparc <jeromed@askia.com>
+      ]]>
     </author>
     <company>Askia SAS</company>
     <helpURL>http://dev.askia.com</helpURL>

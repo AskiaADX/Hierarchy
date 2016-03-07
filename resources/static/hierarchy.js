@@ -581,7 +581,9 @@
             return;
         }
 
-        this.clearLevels(0, value.length);
+        if (this.useSearch != 2) {
+            this.clearLevels(0, value.length);
+        }
 
         this.currentValue = value;
 
@@ -619,7 +621,9 @@
 			return;
 		}
 
-        this.clearLevels(0, true);
+        if (this.useSearch != 2) {
+            this.clearLevels(0, true);
+        }
 
         this.fillDropdown({
             level : this.levels[0],
