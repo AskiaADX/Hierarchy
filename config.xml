@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<control xmlns="http://www.askia.com/ADCSchema"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://www.askia.com/ADCSchema http://www.askia.com/Downloads/dev/schemas/adc2.0/Config.xsd"
-         version="2.0.0"
-         askiaCompat="5.3.3">
+<control  xmlns="http://www.askia.com/2.1.0/ADCSchema"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.askia.com/2.1.0/ADCSchema https://raw.githubusercontent.com/AskiaADX/ADXSchema/2.1.0/ADCSchema.xsd"
+          version="2.1.0"
+          askiaCompat="5.4.2">
   <info>
-    <name>adc2-hierarchy</name>
+    <name>Hierarchy</name>
     <guid>49baccca-474e-4818-8708-1cc9a41b34d4</guid>
-    <version>1.1.1</version>
+    <version>2.0.0</version>
     <date>2016-01-28</date>
-    <description>
-      <![CDATA[
-        Use relative database to create hierarchical search.
+    <description><![CDATA[Use relative database to create hierarchical search.
         Use the following page to generate the database:
         
         http://www.askia.com/Downloads/dev/adc/hierarchy/CSVConverter.html
@@ -19,48 +17,39 @@
         Tested in, major modern browser.
           
         Dependencies:
-          - Database file generated with http://www.askia.com/Downloads/dev/adc/hierarchy/CSVConverter.html 
-      ]]>
-    </description>
-    <author>
-      <![CDATA[
-      Mamadou Sy <mamadou@askia.com>
-      Jerome Duparc <jeromed@askia.com>
-      ]]>
-    </author>
+          - Database file generated with http://www.askia.com/Downloads/dev/adc/hierarchy/CSVConverter.html]]></description>
     <company>Askia SAS</company>
-    <helpURL>http://dev.askia.com</helpURL>
+    <author><![CDATA[Mamadou Sy <mamadou@askia.com>      Jerome Duparc <jeromed@askia.com>]]></author>
     <site>http://www.askia.com</site>
+    <helpURL>http://dev.askia.com</helpURL>
     <categories>
       <category>Search</category>
     </categories>
-    <style width="400" height="300"/>
     <constraints>
-      <constraint on="questions" chapter="true"/>
-      <constraint on="controls" label="true"/>
+      <constraint on="questions" chapter="true" date="false" multiple="false" numeric="false" open="false" requireParentLoop="false" single="false" />
+      <constraint on="controls" label="true" checkbox="false" listbox="false" radiobutton="false" responseblock="false" textbox="false" />
+      <constraint on="responses" max="*" min="*" />
     </constraints>
   </info>
-
   <outputs defaultOutput="default">
     <output id="fallback">
-      <description>Javascript is not enable</description>
-      <condition>
-        <![CDATA[
+      <description><![CDATA[Javascript is not enable]]></description>
+      <condition><![CDATA[
+        
           not(Browser.Support("javascript"))
-        ]]>
-      </condition>
-      <content fileName="NotSupportedBrowser.html" mode="dynamic" position="placeholder" type="html" />
+        
+      ]]></condition>
+      <content fileName="NotSupportedBrowser.html" type="html" mode="dynamic" position="placeholder" />
     </output>
-
     <output id="default">
-      <description>
+      <description><![CDATA[
         Javascript is enable
-      </description>
-      <condition>
-        <![CDATA[
+      ]]></description>
+      <condition><![CDATA[
+        
           browser.support("Javascript") 
-      ]]>
-      </condition>
+      
+      ]]></condition>
       <content fileName="hierarchy.css" type="css" mode="static" position="head" />
       <content fileName="styles.css" type="css" mode="dynamic" position="head" />
       <content fileName="controls.html" type="html" mode="dynamic" position="placeholder" />
@@ -69,164 +58,153 @@
       <content fileName="initializer.js" type="javascript" mode="dynamic" position="foot" />
     </output>
   </outputs>
-
   <properties>
-
     <category id="general" name="General">
-      <property xsi:type="standardProperty" id="database" name="Javascript database file path" type="string"  require="true" mode="dynamic">
-        <description>
+      <property xsi:type="standardProperty" id="database" name="Javascript database file path" type="string" mode="dynamic" require="true">
+        <description><![CDATA[
           Path of the Javascript database file to include in the document.
-        </description>
+        ]]></description>
         <value></value>
       </property>
       <property xsi:type="standardProperty" id="databaseName" name="Database name" type="string" require="true">
-        <description>Name of the database</description>
+        <description><![CDATA[Name of the database]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="values" name="Values to save" type="string" require="true" mode="dynamic">
-        <description>
+      <property xsi:type="standardProperty" id="values" name="Values to save" type="string" mode="dynamic" require="true">
+        <description><![CDATA[
           Name of fields separate with coma and surround by quotes or double-quotes.
           It indicates the fields to save on the latest level selection.
-        </description>
+        ]]></description>
         <value></value>
       </property>
       <property xsi:type="standardProperty" id="prefix" name="HTML Ids prefix" type="string">
-        <description>
+        <description><![CDATA[
           Prefix of all HTML input Ids where the values will be saved.
           It may be use if you have several instance of the Hierarchy ADC into the same page.
-        </description>
+        ]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="levelNames" name="Display name of levels" type="string" require="true" mode="dynamic">
-        <description>
+      <property xsi:type="standardProperty" id="levelNames" name="Display name of levels" type="string" mode="dynamic" require="true">
+        <description><![CDATA[
            Label of the dropdown for each levels. 
            Each level must have a display names even if it's an empty name.
            All names must be surrounded by a double-quotes and separate with coma.
            eg. "Brands", "Models", "Versions"
-        </description>
+        ]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="blankOptions" name="Text of first dropdown options" type="string" require="false" mode="dynamic">
-        <description>
+      <property xsi:type="standardProperty" id="blankOptions" name="Text of first dropdown options" type="string" mode="dynamic" require="false">
+        <description><![CDATA[
           Text of the first dropdown options for each levels.
           All textes must be surrounded by a double-quotes and separate with coma.
           eg. "Please select a brands", "Please select a models", "Please select a versions"
-        </description>
+        ]]></description>
         <value></value>
       </property>
       <property xsi:type="standardProperty" id="orientation" name="Orientation" type="number" require="false">
-        <description>Horizontal or vertical dropdowns orientation</description>
-        <value>0</value>
+        <description><![CDATA[Horizontal or vertical dropdowns orientation]]></description>
+        <value><![CDATA[0]]></value>
         <options>
-          <option value="0" text="Vertical"/>
-          <option value="1" text="Horizontal"/>
+          <option value="0" text="Vertical" />
+          <option value="1" text="Horizontal" />
         </options>
       </property>
-      <property xsi:type="standardProperty" id="horizontalSpace" name="Horizontal space" type="string" require="false">
-        <description>Size of the horizontal space between dropdowns (pixel by default)</description>
-        <value>15px</value>
+      <property xsi:type="standardProperty" id="horizontalSpace" name="Horizontal space" type="string" require="false" visible="true">
+        <description><![CDATA[Size of the horizontal space between dropdowns (pixel by default)]]></description>
+        <value><![CDATA[15px]]></value>
       </property>
       <property xsi:type="standardProperty" id="inputsWidth" name="Width of inputs" type="string" require="false">
-        <description>Width of the inputs, you can also specified the unit (pixel by default)</description>
-        <value>300px</value>
+        <description><![CDATA[Width of the inputs, you can also specified the unit (pixel by default)]]></description>
+        <value><![CDATA[300px]]></value>
       </property>
-      <property xsi:type="standardProperty" id="dropDownSize" name="Dropdown size" type="number" min="1" require="false">
-        <description>Size of the dropdown, meaning the number of options visible before to scroll</description>
-        <value>10</value>
+      <property xsi:type="standardProperty" id="dropDownSize" name="Dropdown size" type="number" require="false" min="1">
+        <description><![CDATA[Size of the dropdown, meaning the number of options visible before to scroll]]></description>
+        <value><![CDATA[10]]></value>
       </property>
-      <property xsi:type="standardProperty" id="notSupportedBrowser" name="Not supported browser text" type="string" require="true" mode="dynamic">
-        <description>
+      <property xsi:type="standardProperty" id="notSupportedBrowser" name="Not supported browser text" type="string" mode="dynamic" require="true">
+        <description><![CDATA[
           Message to display to the non-supported browser
-        </description>
-        <value>
-          <![CDATA[
+        ]]></description>
+        <value><![CDATA[
+          
             Sorry this page uses Javascript code, please enable it.
-          ]]>
-        </value>
+          
+        ]]></value>
       </property>
     </category>
-
     <category id="searchCategory" name="Search">
       <property xsi:type="standardProperty" id="useSearch" name="Use search" type="number" require="false">
-        <description>
+        <description><![CDATA[
           Add the input search
-        </description>
-		<value>1</value>
+        ]]></description>
+        <value><![CDATA[1]]></value>
         <options>
           <option value="0" text="No search" />
           <option value="1" text="Auto-generate search" />
           <option value="2" text="Custom search input" />
         </options>
       </property>
-      <property xsi:type="standardProperty" id="customSearchId" name="Id of custom search input" type="string" require="false" mode="dynamic">
-        <description>
+      <property xsi:type="standardProperty" id="customSearchId" name="Id of custom search input" type="string" mode="dynamic" require="false">
+        <description><![CDATA[
           Id of the custom search input
-        </description>
+        ]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="searchLabel" name="Label of search input" type="string" require="false" mode="dynamic">
-        <description>
+      <property xsi:type="standardProperty" id="searchLabel" name="Label of search input" type="string" mode="dynamic" require="false">
+        <description><![CDATA[
           Label of the search input
-        </description>
+        ]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="searchIn" name="Search fields" type="string" require="true" mode="dynamic">
-        <description>
+      <property xsi:type="standardProperty" id="searchIn" name="Search fields" type="string" mode="dynamic" require="true">
+        <description><![CDATA[
           Name of fields separate with coma and surround by quotes or double-quotes.
           It indicates in which fields to search
-        </description>
+        ]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="searchAtBeginning" name="Search at beginning" type="boolean" require="false" mode="static">
-        <description>
-          Search at the beginning of the field value
-        </description>
-        <value>true</value>
+      <property xsi:type="standardProperty" id="searchAtBeginning" name="Search at beginning" type="boolean" mode="static" require="false" visible="true">
+        <description><![CDATA[Search at the beginning of the field value]]></description>
+        <value><![CDATA[0]]></value>
       </property>
-      <property xsi:type="standardProperty" id="searchSeparator" name="Separator of words in input search" type="string" require="false" mode="static">
-        <description>
+      <property xsi:type="standardProperty" id="searchSeparator" name="Separator of words in input search" type="string" mode="static" require="false">
+        <description><![CDATA[
           Separator of words in the input search
-        </description>
-        <value>+</value>
+        ]]></description>
+        <value><![CDATA[+]]></value>
       </property>
-      <property xsi:type="standardProperty" id="minChars" name="Min characters" type="number" min="2" require="false">
-        <description>
+      <property xsi:type="standardProperty" id="minChars" name="Min characters" type="number" require="false" min="2">
+        <description><![CDATA[
           Indicates the minimum number of characters before to perform the search
-        </description>
-        <value>2</value>
+        ]]></description>
+        <value><![CDATA[2]]></value>
       </property>
     </category>
-    
     <category id="behaviours" name="Behaviours">
-      <property xsi:type="standardProperty" id="firstLevelVisible" name="Display first level items" type="boolean" require="false">
-        <description>
-          Display first level items
-        </description>
-        <value>false</value>
+      <property xsi:type="standardProperty" id="firstLevelVisible" name="Display first level items" type="boolean" require="false" visible="true">
+        <description><![CDATA[Display first level items]]></description>
+        <value><![CDATA[0]]></value>
       </property>
-      <property xsi:type="standardProperty" id="autoSelect" name="Auto select when 1 result found" type="boolean" require="false">
-        <description>
-          Auto select when only one result is found
-        </description>
-        <value>false</value>
+      <property xsi:type="standardProperty" id="autoSelect" name="Auto select when 1 result found" type="boolean" require="false" visible="true">
+        <description><![CDATA[Auto select when only one result is found]]></description>
+        <value><![CDATA[0]]></value>
       </property>
       <property xsi:type="standardProperty" id="visibility" name="Sub-levels visibility" type="string" require="false">
-        <description>Visibility of sub-levels when not activated</description>
-        <value>visible</value>
+        <description><![CDATA[Visibility of sub-levels when not activated]]></description>
+        <value><![CDATA[visible]]></value>
         <options>
-          <option value="visible" text="Visible"/>
-          <option value="hide" text="Hidden"/>
-          <option value="disabled" text="Disabled"/>
+          <option value="visible" text="Visible" />
+          <option value="hide" text="Hidden" />
+          <option value="disabled" text="Disabled" />
         </options>
       </property>
-      <property xsi:type="standardProperty" id="maxResults" name="Max results" type="number" min="0" require="false">
-        <description>
+      <property xsi:type="standardProperty" id="maxResults" name="Max results" type="number" require="false" min="0">
+        <description><![CDATA[
           Indicates the maximum number of results to display in the drop-down.
           Set 0 for unlimited results
-        </description>
-        <value>0</value>
+        ]]></description>
+        <value><![CDATA[0]]></value>
       </property>
     </category>
-
   </properties>
 </control>

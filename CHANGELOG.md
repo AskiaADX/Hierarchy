@@ -1,3 +1,7 @@
+# Version 2.0.0
+
+* Theme implementation
+
 # Version 1.1.1
 
 * Fixed field not populated when going back on the screen for the useSearch = 2

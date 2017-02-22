@@ -858,6 +858,9 @@
             output = outputs[i];
             output.element.value = (record) ? record[output.fieldIndex] : "";
         }
+        if (window.askia) {
+            askia.triggerAnswer();
+        }
     };
 
 	/**
