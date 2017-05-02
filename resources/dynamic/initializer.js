@@ -15,6 +15,7 @@
 		maxResults: {%:= CurrentADC.PropValue("maxResults")%},
 		visibility: "{%:= CurrentADC.PropValue("visibility")%}",
 		instanceId: {%= CurrentADC.InstanceId%},
-		autoSelect: {%= CurrentADC.PropValue("autoSelect")%}
+		autoSelect: {%= CurrentADC.PropValue("autoSelect")%},
+        currentQuestion: "{%:= CurrentQuestion.Shortcut %}"
 	});
 } ());

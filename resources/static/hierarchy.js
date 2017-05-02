@@ -366,6 +366,7 @@
         this.autoSelect = options.autoSelect || false;
         this.searchAtBeginning = options.searchAtBeginning || false;
         this.searchSeparator = options.searchSeparator || '+';
+        this.currentQuestion = options.currentQuestion || '';
 
 		// Register the initialization when the dom is ready
 		var self = this;
@@ -858,7 +859,10 @@
             output = outputs[i];
             output.element.value = (record) ? record[output.fieldIndex] : "";
         }
-        if (window.askia) {
+        if (window.askia 
+            && window.arrLiveRoutingShortcut 
+            && window.arrLiveRoutingShortcut.length > 0
+            && window.arrLiveRoutingShortcut.indexOf(this.currentQuestion) >= 0) {
             askia.triggerAnswer();
         }
     };
