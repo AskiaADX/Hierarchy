@@ -60,48 +60,42 @@
   </outputs>
   <properties>
     <category id="general" name="General">
-      <property xsi:type="standardProperty" id="database" name="Javascript database file path" type="string" mode="dynamic" require="true">
-        <description><![CDATA[
-          Path of the Javascript database file to include in the document.
-        ]]></description>
+      <property xsi:type="standardProperty" id="database" name="Javascript database file path" type="string" mode="dynamic" require="true" visible="true">
+        <description><![CDATA[Path of the Javascript database file to include in the document.
+example: ??ResPath??myfile.js]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="databaseName" name="Database name" type="string" require="true">
-        <description><![CDATA[Name of the database]]></description>
+      <property xsi:type="standardProperty" id="databaseName" name="Database name" type="string" require="true" visible="true">
+        <description><![CDATA[Name of the database
+example: TOWN]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="values" name="Values to save" type="string" mode="dynamic" require="true">
-        <description><![CDATA[
-          Name of fields separate with coma and surround by quotes or double-quotes.
-          It indicates the fields to save on the latest level selection.
-        ]]></description>
+      <property xsi:type="standardProperty" id="values" name="Values to save" type="string" mode="dynamic" require="true" visible="true">
+        <description><![CDATA[Name of fields separate with coma and surround by quotes or double-quotes.
+It indicates the fields to save on the latest level selection.
+example: "ID","DEP_ID","DEP","CP","VILLE","REGION_ID","REGION"]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="prefix" name="HTML Ids prefix" type="string">
-        <description><![CDATA[
-          Prefix of all HTML input Ids where the values will be saved.
-          It may be use if you have several instance of the Hierarchy ADC into the same page.
-        ]]></description>
+      <property xsi:type="standardProperty" id="prefix" name="HTML Ids prefix" type="string" require="false" visible="true">
+        <description><![CDATA[Prefix of all HTML input Ids where the values will be saved.
+It may be use if you have several instance of the Hierarchy ADC into the same page.
+example: item!!CI(1)!!]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="levelNames" name="Display name of levels" type="string" mode="dynamic" require="true">
-        <description><![CDATA[
-           Label of the dropdown for each levels. 
-           Each level must have a display names even if it's an empty name.
-           All names must be surrounded by a double-quotes and separate with coma.
-           eg. "Brands", "Models", "Versions"
-        ]]></description>
+      <property xsi:type="standardProperty" id="levelNames" name="Display name of levels" type="string" mode="dynamic" require="true" visible="true">
+        <description><![CDATA[Label of the dropdown for each levels. 
+Each level must have a display names even if it's an empty name.
+All names must be surrounded by a double-quotes and separate with coma.
+example: "Brands", "Models", "Versions"]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="blankOptions" name="Text of first dropdown options" type="string" mode="dynamic" require="false">
-        <description><![CDATA[
-          Text of the first dropdown options for each levels.
-          All textes must be surrounded by a double-quotes and separate with coma.
-          eg. "Please select a brands", "Please select a models", "Please select a versions"
-        ]]></description>
+      <property xsi:type="standardProperty" id="blankOptions" name="Text of first dropdown options" type="string" mode="dynamic" require="false" visible="true">
+        <description><![CDATA[Text of the first dropdown options for each levels.
+All textes must be surrounded by a double-quotes and separate with coma.
+example: "Please select a brands", "Please select a models", "Please select a versions"]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="orientation" name="Orientation" type="number" require="false">
+      <property xsi:type="standardProperty" id="orientation" name="Orientation" type="number" require="false" visible="true">
         <description><![CDATA[Horizontal or vertical dropdowns orientation]]></description>
         <value><![CDATA[0]]></value>
         <options>
@@ -144,23 +138,20 @@
           <option value="2" text="Custom search input" />
         </options>
       </property>
-      <property xsi:type="standardProperty" id="customSearchId" name="Id of custom search input" type="string" mode="dynamic" require="false">
-        <description><![CDATA[
-          Id of the custom search input
-        ]]></description>
+      <property xsi:type="standardProperty" id="customSearchId" name="Id of custom search input" type="string" mode="dynamic" require="false" visible="true">
+        <description><![CDATA[Id of the custom search input
+example: search]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="searchLabel" name="Label of search input" type="string" mode="dynamic" require="false">
-        <description><![CDATA[
-          Label of the search input
-        ]]></description>
+      <property xsi:type="standardProperty" id="searchLabel" name="Label of search input" type="string" mode="dynamic" require="false" visible="true">
+        <description><![CDATA[Label of the search input
+Support html syntax]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="searchIn" name="Search fields" type="string" mode="dynamic" require="true">
-        <description><![CDATA[
-          Name of fields separate with coma and surround by quotes or double-quotes.
-          It indicates in which fields to search
-        ]]></description>
+      <property xsi:type="standardProperty" id="searchIn" name="Search fields" type="string" mode="dynamic" require="true" visible="true">
+        <description><![CDATA[Name of fields separate with coma and surround by quotes or double-quotes.
+It indicates in which fields to search
+example: "CP","VILLE"]]></description>
         <value></value>
       </property>
       <property xsi:type="standardProperty" id="searchAtBeginning" name="Search at beginning" type="boolean" mode="static" require="false" visible="true">
