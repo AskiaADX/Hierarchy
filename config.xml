@@ -7,7 +7,7 @@
   <info>
     <name>Hierarchy</name>
     <guid>49baccca-474e-4818-8708-1cc9a41b34d4</guid>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <date>2016-01-28</date>
     <description><![CDATA[Use relative database to create hierarchical search.
         Use the following page to generate the database:
@@ -127,16 +127,19 @@ example: "Please select a brands", "Please select a models", "Please select a ve
       </property>
     </category>
     <category id="searchCategory" name="Search">
-      <property xsi:type="standardProperty" id="useSearch" name="Use search" type="number" require="false">
-        <description><![CDATA[
-          Add the input search
-        ]]></description>
+      <property xsi:type="standardProperty" id="useSearch" name="Use search" type="number" require="false" visible="true">
+        <description><![CDATA[Add the input search]]></description>
         <value><![CDATA[1]]></value>
         <options>
           <option value="0" text="No search" />
           <option value="1" text="Auto-generate search" />
           <option value="2" text="Custom search input" />
+          <option value="3" text="Filtered search" />
         </options>
+      </property>
+      <property xsi:type="standardProperty" id="filterFirstLevel" name="Filter first level value" type="string" mode="dynamic" require="false" visible="true">
+        <description><![CDATA[Filter the first level with the corresponding value]]></description>
+        <value></value>
       </property>
       <property xsi:type="standardProperty" id="customSearchId" name="Id of custom search input" type="string" mode="dynamic" require="false" visible="true">
         <description><![CDATA[Id of the custom search input

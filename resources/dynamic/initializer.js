@@ -9,6 +9,7 @@
 		dropdowns: {%= On(CurrentADC.PropValue("dropDownSize").ToNumber() > 1, "false", "true")%},
 		blankOptions: {%:= On(CurrentADC.PropValue("blankOptions") <> "", "[" + CurrentADC.PropValue("blankOptions") + "]", "null")%}, 
 		useSearch: {%= CurrentADC.PropValue("useSearch")%},
+        filterFirstLevel: "{%= CurrentADC.PropValue("filterFirstLevel")%}",
 		customSearchId : "{%= CurrentADC.PropValue("customSearchId")%}",
 		firstLevelVisible: {%= CurrentADC.PropValue("firstLevelVisible")%},
 		minChars: {%:= CurrentADC.PropValue("minChars")%},
