@@ -525,14 +525,6 @@
       addEvent(this.inputSearch, 'keyup', function () {
         self.search(this.value);
       });
-
-      // Manage Filter first level options
-      if (this.useSearch === 3) {
-        var search = document.querySelector("#hierarchy_search_" + this.instanceId);
-        if (filterFirstLevel !== '') {
-          search.value = filterFirstLevel + searchSeparator;
-        }
-      }
     }
 
     // Treat each level
@@ -581,6 +573,19 @@
         element: document.getElementById(this.prefix + value)
       });
     }, this);
+    
+    // Manage Filter first level options
+    if (this.useSearch === 3) {
+        var search = document.querySelector("#hierarchy_search_" + this.instanceId);
+        var selectedRow = '';
+      
+        if (filterFirstLevel === document.getElementById(this.levels[0].name).value && this.levels[1]) {
+            selectedRow = document.getElementById(this.levels[1].name).value;
+        }
+        if (filterFirstLevel !== '') {
+            search.value = filterFirstLevel + searchSeparator + selectedRow;
+        }
+    }
 
     // Trigger the search if the input search is not empty
     if (this.inputSearch && this.inputSearch.value) {
