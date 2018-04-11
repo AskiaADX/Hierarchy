@@ -15,7 +15,7 @@ ElseIf CurrentADC.PropValue("visibility") = "disabled" Then
    inputAttr = divAttr
 EndIf
 %}
-<div class="hierarchy-search" id="hierarchy_search_container_{%= id%}">
+<div class="hierarchy-search askia-question-{%= CurrentQuestion.InputCode %}" id="hierarchy_search_container_{%= id%}">
     {% If CurrentADC.PropValue("useSearch") = "1" or CurrentADC.PropValue("useSearch") = "3" Then %}
     <div class="hierarchy-search-input-container">
         <label for="hierarchy_search_{%= id %}">{%:= CurrentADC.PropValue("searchLabel")%}</label>

@@ -7,7 +7,7 @@
   <info>
     <name>Hierarchy</name>
     <guid>49baccca-474e-4818-8708-1cc9a41b34d4</guid>
-    <version>2.0.2</version>
+    <version>2.0.3</version>
     <date>2016-01-28</date>
     <description><![CDATA[Use relative database to create hierarchical search.
         Use the following page to generate the database:
