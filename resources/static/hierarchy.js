@@ -588,7 +588,7 @@
     }
 
     // Trigger the search if the input search is not empty
-    if (this.inputSearch && this.inputSearch.value) {
+    if (this.useSearch === 3 && this.inputSearch && this.inputSearch.value) {
       triggerEvent(this.inputSearch, 'keyup');
     }
 
