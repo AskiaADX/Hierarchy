@@ -1,6 +1,67 @@
 #hierarchy_search_container_{%= CurrentADC.InstanceId%} input,
 #hierarchy_search_container_{%= CurrentADC.InstanceId%} select {
     width : {%:= CurrentADC.PropValue("inputsWidth")%};
+    background-color: rgba({%:= Theme.WhiteColor %});
+    color: rgba({%:= Theme.BlackColor %});
+	padding: 5px;
+	border-radius: {%:= Theme.BorderRadius %};
+    border: {%:= Theme.BorderWidth %} solid rgba({%:= Theme.NeutralColor %});
+	outline: none !important;
+}
+#hierarchy_search_container_{%= CurrentADC.InstanceId%} select > option {
+    background-color: rgba({%:= Theme.WhiteColor %});
+    color: rgba({%:= Theme.BlackColor %});
+	padding: 5px;
+	border-radius: {%:= Theme.BorderRadius %};
+    border: 0 solid transparent;
+	outline: none !important;
+    cursor:pointer;
+}
+select:-internal-list-box:disabled option:checked {
+    background-color: transparent !important;
+    color: rgba({%:= Theme.BlackColor %}) !important;
+}
+select:-internal-list-box option:checked:disabled {
+    background-color: transparent !important;
+    color: rgba({%:= Theme.BlackColor %}) !important;
+}
+option:disabled {
+    background-color: transparent !important;
+    color: rgba({%:= Theme.BlackColor %}) !important;
+}
+option[disabled='disabled']::-ms-value,
+option[disabled='disabled']:checked::-ms-value {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: rgba({%:= Theme.BlackColor %}) !important;
+}
+option[disabled='disabled'],
+option[disabled='disabled']:checked {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: rgba({%:= Theme.BlackColor %}) !important;
+}
+option[disabled] {
+    background-color: transparent !important;
+    color: rgba({%:= Theme.BlackColor %}) !important;
+}
+#hierarchy_search_container_{%= CurrentADC.InstanceId%} input:focus, 
+#hierarchy_search_container_{%= CurrentADC.InstanceId%} select:focus {
+	outline: none !important;
+}
+#hierarchy_search_container_{%= CurrentADC.InstanceId%} option:hover {
+    background-color: rgba({%:= Theme.BlackColor.ToRGB() %},0.1);
+    color: rgba({%:= Theme.BlackColor %});
+}
+#hierarchy_search_container_{%= CurrentADC.InstanceId%} option:selected, 
+#hierarchy_search_container_{%= CurrentADC.InstanceId%} option:checked, 
+#hierarchy_search_container_{%= CurrentADC.InstanceId%} select option:selected, 
+#hierarchy_search_container_{%= CurrentADC.InstanceId%} select option:checked {
+    background-color: rgba({%:= Theme.SecondaryColor %});
+    color: rgba({%:= Theme.WhiteColor %});
+}
+button.close-icon:after {
+    color: rgba({%= Theme.BlackColor %});
 }
 {% if CurrentADC.PropValue("orientation").ToNumber() = 1 Then %}
 #hierarchy_search_container_{%= CurrentADC.InstanceId%} input::-ms-clear,
@@ -11,6 +72,7 @@
 }
 #hierarchy_search_container_{%= CurrentADC.InstanceId%}  .hierarchy-search-result-container div {
     display: inline-block;
+    vertical-align: top;
     margin-right: {%:= CurrentADC.PropValue("horizontalSpace")%};
     *zoom : 1;
     *display : inline;

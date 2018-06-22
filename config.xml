@@ -7,7 +7,7 @@
   <info>
     <name>Hierarchy</name>
     <guid>49baccca-474e-4818-8708-1cc9a41b34d4</guid>
-    <version>2.0.4</version>
+    <version>2.0.5</version>
     <date>2016-01-28</date>
     <description><![CDATA[Use relative database to create hierarchical search.
         Use the following page to generate the database:
@@ -115,15 +115,13 @@ example: "Please select a brands", "Please select a models", "Please select a ve
         <description><![CDATA[Size of the dropdown, meaning the number of options visible before to scroll]]></description>
         <value><![CDATA[10]]></value>
       </property>
-      <property xsi:type="standardProperty" id="notSupportedBrowser" name="Not supported browser text" type="string" mode="dynamic" require="true">
-        <description><![CDATA[
-          Message to display to the non-supported browser
-        ]]></description>
-        <value><![CDATA[
-          
-            Sorry this page uses Javascript code, please enable it.
-          
-        ]]></value>
+      <property xsi:type="standardProperty" id="notSupportedBrowser" name="Not supported browser text" type="string" mode="dynamic" require="true" visible="true">
+        <description><![CDATA[Message to display to the non-supported browser]]></description>
+        <value><![CDATA[Sorry this page uses Javascript code, please enable it.]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="noMatchFound" name="No match found caption" type="string" mode="dynamic" require="false" visible="true">
+        <description><![CDATA[Text to display when no match found in the database]]></description>
+        <value></value>
       </property>
     </category>
     <category id="searchCategory" name="Search">
@@ -172,6 +170,22 @@ example: "CP","VILLE"]]></description>
           Indicates the minimum number of characters before to perform the search
         ]]></description>
         <value><![CDATA[2]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="sortFirst" name="Sort matching beginning first" type="string" mode="dynamic" require="true" visible="true">
+        <description><![CDATA[Sort the results alphabetically matching the beginning of string then alphabetically for contained text]]></description>
+        <value><![CDATA[no]]></value>
+        <options>
+          <option value="yes" text="Yes" />
+          <option value="no" text="No" />
+        </options>
+      </property>
+      <property xsi:type="standardProperty" id="searchPhonetic" name="Use phonetic search" type="string" mode="dynamic" require="true" visible="true">
+        <description><![CDATA[Use phonetic search, if yes this groups are treated equally Aaàáâãä ; Eeèéêë ; IiïîyY ; Ooöô ; Uuùúûü ; Ccç]]></description>
+        <value><![CDATA[no]]></value>
+        <options>
+          <option value="yes" text="Yes" />
+          <option value="no" text="No" />
+        </options>
       </property>
     </category>
     <category id="behaviours" name="Behaviours">

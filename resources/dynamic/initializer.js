@@ -17,6 +17,9 @@
 		visibility: "{%:= CurrentADC.PropValue("visibility")%}",
 		instanceId: {%= CurrentADC.InstanceId%},
 		autoSelect: {%= CurrentADC.PropValue("autoSelect")%},
-        currentQuestion: "{%:= CurrentQuestion.Shortcut %}"
+        currentQuestion: "{%:= CurrentQuestion.Shortcut %}",
+        noMatchFound: "{%:= CurrentADC.PropValue("noMatchFound")%}",
+        sortFirst: "{%:= CurrentADC.PropValue("sortFirst") %}",
+        searchPhonetic: "{%:= CurrentADC.PropValue("searchPhonetic") %}"
 	});
 } ());

@@ -252,6 +252,50 @@
 
     return theClone;
   }
+    
+    /**
+   * Sort the array alphabetically matching the beginning of string then alphabetically for contained text object or array
+   * @param {Object|Array} input the first input to search
+   */
+    function sortInputFirst(input, data, index, searchPhonetic) {
+        var first = [];
+        var others = [];
+        for (var i = 0; i < data.length; i++) {
+          if (searchPhonetic === 'yes' && (data[i][index].withoutAccent().toLowerCase().indexOf(input.withoutAccent().toLowerCase()) == 0)) {
+                first.push(data[i]);
+          } else if (searchPhonetic === 'no' && (data[i][index].toLowerCase().indexOf(input.toLowerCase()) == 0)) {
+                first.push(data[i]);
+          } else {
+                others.push(data[i]);
+          }
+        }
+        return(first.concat(others));
+    }
+    
+    /**
+   * Replace the accent by the non accent version and replace y by i for phonetic search
+   */
+    String.prototype.withoutAccent = function(){
+        // Array accents
+		var pattern_accent = new Array(/À/g, /Á/g, /Â/g, /Ã/g, /Ä/g, /Å/g, /Æ/g, /Ç/g, /È/g, /É/g, /Ê/g, /Ë/g,
+		/Ì/g, /Í/g, /Î/g, /Ï/g, /Ð/g, /Ñ/g, /Ò/g, /Ó/g, /Ô/g, /Õ/g, /Ö/g, /Ø/g, /Ù/g, /Ú/g, /Û/g, /Ü/g, /Ý/g,
+		/Þ/g, /ß/g, /à/g, /á/g, /â/g, /ã/g, /ä/g, /å/g, /æ/g, /ç/g, /è/g, /é/g, /ê/g, /ë/g, /ì/g, /í/g, /î/g,
+		/ï/g, /ð/g, /ñ/g, /ò/g, /ó/g, /ô/g, /õ/g, /ö/g, /ø/g, /ù/g, /ú/g, /û/g, /ü/g, /ý/g, /ý/g, /þ/g, /ÿ/g);
+ 
+		// Array without accents
+		var pattern_replace_accent = new Array("A","A","A","A","A","A","A","C","E","E","E","E",
+		"I","I","I","I","D","N","O","O","O","O","O","O","U","U","U","U","I",
+		"b","s","a","a","a","a","a","a","a","c","e","e","e","e","i","i","i",
+		"i","d","n","o","o","o","o","o","o","u","u","u","u","i","i","b","i");
+        
+        var my_string = this;
+ 
+		//For each caracters if accent remplace it by his non accent version
+		for(var i=0;i<pattern_accent.length;i++){
+			my_string = my_string.replace(pattern_accent[i],pattern_replace_accent[i]);
+		}
+		return my_string;
+    }
 
   /**
    * Shim string.prototype.trim
@@ -345,7 +389,7 @@
    * @param {Boolean} [options.firstLevelVisible=false] Indicates if the first level is visible
    * @param {Number} [options.useSearch=0] Use the search box (0: no search, 1: auto-generated search, 2: custom search box), if not then the first level is implicitly visible
    * @param {String} [options.customSearchId=''] When useSearch=2, specified the id of the input search
-   * @param {Number} [options.minChars=2] Indicates the minimum number of characters before to start the search
+   * @param {Number} [options.minChars=0] Indicates the minimum number of characters before to start the search
    * @param {Array} [options.searchIn] Search fields
    * @param {Boolean} [options.searchAtBeginning=false] Search at the beginning of each words
    * @param {String} [options.searchSeparator='+'] Separator to split search value
@@ -359,7 +403,7 @@
     this.currentValue = '';
     this.options = options;
     this.prefix = options.prefix || "";
-    this.minChars = options.minChars || 2;
+    this.minChars = options.minChars || 0;
     this.maxResults = (options.maxResults && options.maxResults > 0) ? options.maxResults : 0;
     this.useSearch = options.useSearch || 0;
     this.filterFirstLevel = options.filterFirstLevel || '';
@@ -374,6 +418,9 @@
     this.searchAtBeginning = options.searchAtBeginning || false;
     this.searchSeparator = options.searchSeparator || '+';
     this.currentQuestion = options.currentQuestion || '';
+    this.noMatchFound = options.noMatchFound || '';
+    this.sortFirst = options.sortFirst;
+    this.searchPhonetic = options.searchPhonetic;
 
     filterFirstLevel = options.filterFirstLevel;
     searchSeparator = options.searchSeparator;
@@ -525,6 +572,9 @@
       addEvent(this.inputSearch, 'keyup', function () {
         self.search(this.value);
       });
+      addEvent(this.inputSearch, 'search', function () {
+        self.search(this.value);
+      });
     }
 
     // Treat each level
@@ -560,6 +610,9 @@
 
       // Add event listener
       addEvent(el, 'change', function () {
+        self.onselect(index, this.value);
+      });
+      addEvent(el, 'search', function () {
         self.onselect(index, this.value);
       });
 
@@ -841,8 +894,11 @@
       added = {},
       i, l,
       maxResults = this.maxResults;
-      
-    if (records.length === 1 && this.autoSelect) {
+      var noFound = this.options.noMatchFound;
+	
+    if (records.length === 0 && noFound.trim().length > 0) {
+      opts.push('<option value="0" disabled="disabled">' + noFound + '</option>');
+    } else if (records.length === 1 && this.autoSelect) {
       opts.push('<option value="' + records[0][levelIdIndex] + '" selected="selected">' + records[0][levelNameIndex] + '</option>');
     } else {
       if (maxResults > 0) {
@@ -879,8 +935,9 @@
 
     // Trigger the change event
     if (options.triggerEvent && (records.length === 1 || opts.length === 1) && this.autoSelect) {
-      level.element.selectedIndex = 0;
+      if (opts[0].indexOf('disabled') === -1) level.element.selectedIndex = 0;
       triggerEvent(level.element, 'change');
+      triggerEvent(level.element, 'search');
     }
   };
 
@@ -998,6 +1055,8 @@
     this.regexps = this.computeRegexps();
     this.results = [];
     this.isDone = false;
+    this.sortFirst = hierarchy.sortFirst;
+    this.searchPhonetic = hierarchy.searchPhonetic;
   }
 
 
@@ -1021,7 +1080,11 @@
       i, l;
 
     for (i = 0, l = values.length; i < l; i += 1) {
-      pattern = this.escapeRegExp(values[i].trim());
+      if (this.hierarchy.searchPhonetic === 'yes') {
+        pattern = this.escapeRegExp(values[i].trim().withoutAccent());
+      } else {
+        pattern = this.escapeRegExp(values[i].trim());   
+      }
       if (this.searchAtBeginning) {
         pattern = '^' + pattern;
       }
@@ -1037,7 +1100,12 @@
    */
   SearchProcess.prototype.isFieldMatch = function isFieldMatch(fieldIndex) {
     this.rg.lastIndex = 0; // Reset the search
-    return this.rg.test(this.record[fieldIndex]);
+      
+    if (this.searchPhonetic === 'yes') {
+      return this.rg.test(this.record[fieldIndex].withoutAccent());
+    } else {
+      return this.rg.test(this.record[fieldIndex]);   
+    }
   };
 
   /**
@@ -1047,7 +1115,8 @@
   SearchProcess.prototype.isRegexpMatch = function isRegexpMatch(rg) {
     return some(this.searchFieldIndexes, this.isFieldMatch, {
       record: this.record,
-      rg: rg
+      rg: rg,
+      searchPhonetic: this.searchPhonetic
     });
   };
 
@@ -1063,7 +1132,8 @@
     return every(this.regexps, this.isRegexpMatch, {
       searchFieldIndexes: this.searchFieldIndexes,
       isFieldMatch: this.isFieldMatch,
-      record: record
+      record: record,
+      searchPhonetic: this.searchPhonetic
     });
   };
 
@@ -1072,7 +1142,11 @@
    * Search the string in the database
    */
   SearchProcess.prototype.search = function search() {
-    this.results = filter(this.records, this.isRecordMatch, this);
+      if (this.sortFirst === 'yes') {
+        this.results = sortInputFirst(this.value.split(this.searchSeparator)[0], filter(this.records, this.isRecordMatch, this),this.hierarchy.options.database.header[this.hierarchy.levels[0].name],this.searchPhonetic);  
+      } else {
+        this.results = filter(this.records, this.isRecordMatch, this);  
+      }
     if (this.results.length > 0 && this.results[0][1] === this.results[this.results.length - 1][1]) {
         searchResult = 2;
     } else if (this.results.length > 0 && this.results[0][0] !== this.results[this.results.length - 1][0]) {
